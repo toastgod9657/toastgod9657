@@ -1,5 +1,32 @@
-- 👋 Hi, I’m @toastgod9657
-- 👀 I’m interested in game design
-- 🌱 I’m currently learning code
-- 💞️ I’m looking to collaborate on learning code
-- 📫 How to reach me dm me
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class acceleratetowards : MonoBehaviour
+{
+    [SerializeField]
+    Transform transTowards;
+
+    [SerializeField]
+    float fSpeed;
+    
+    Rigidbody rigid;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        rigid = GetComponent<Rigidbody>();
+        if (transTowards == null)
+        {
+            transTowards = FindObjectOfType<addplaycontroledvolocity>().transform;
+
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Vector3 v3MeTowardsTarget = transTowards.position - transform.position;
+        rigid.velocity += v3MeTowardsTarget.normalized * fSpeed * Time.deltaTime;   
+    }
+}
